@@ -1,0 +1,740 @@
+@mixin radius($radius)
+	border-radius: $radius
+	-moz-border-radius: $radius
+	-webkit-border-radius: $radius
+	-o-border-radius: $radius
+	-ie-border-radius: $radius
+
+@mixin box
+	box-sizing: border-box
+	-moz-box-sizing: border-box
+	-webkit-box-sizing: border-box
+	-o-box-sizing: border-box
+	-ie-box-sizing: border-box
+
+@mixin shadow($param)
+	box-shadow: $param
+	-moz-box-shadow: $param
+	-webkit-box-shadow: $param
+	-o-box-shadow: $param
+	-ie-box-shadow: $param
+
+html
+	height: 100%
+	width: 100%
+	display: table
+
+body
+	margin: 0
+	background-color: rgb(238, 238, 238)
+	font-family: PT SANS NARROW, CALIBRI, sans-serif
+	height: inherit
+	width: inherit
+	cursor: default
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	-o-user-select: none
+	user-select: none
+	font-size: 100%
+	color: rgb(113, 113, 113)
+
+ul
+	margin: 0
+	padding: 0
+	list-style: none
+
+.clear
+	clear: both
+	width: 1px
+
+.tc
+	display: table-cell
+	vertical-align: middle
+
+.lightblue
+	color: lightblue
+
+.lightgray
+	color: lightgray
+
+.select
+	@include radius(1px)
+	list-style: none
+	cursor: pointer
+	font-weight: bold
+	font-size: 200%
+	position: relative
+	z-index: 102
+	margin-left: auto
+	margin-right: auto
+	p
+		height: inherit
+		width: inherit
+		margin: 0
+		&:hover
+			color: orange
+	ul
+		height: inherit
+		width: inherit
+		// background-color: #fff
+		li
+			height: inherit
+			width: inherit
+			&:hover
+				color: orange
+
+.container
+	margin: 30px 280px
+	position: relative
+
+.log-out
+	width: 32px
+	height: 32px
+	background-image: url(icon/logout-passive.png)
+	position: absolute
+	left: 0
+	cursor: pointer
+	&:hover
+		background-image: url(icon/logout-active.png)
+
+.main
+	header
+		text-align: center
+		height: 60px
+		.event-list
+			border: none
+			outline: none
+			background-color: transparent
+			font-size: 160%
+			margin: 0
+			padding: 0
+			color: #717171
+			font-weight: bold
+		.event-name
+			margin: 0
+			&.scroll
+				position: fixed
+				width: 250px
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
+				left: 15px
+				top: 60px
+				font-size: 160%
+		.checkedin-value
+			margin: 0
+			&.scroll
+				position: fixed
+				top: 30px
+				left: 190px
+	aside
+		.panel-wrap
+			height: 40px
+		position: relative
+		height: 155px
+		.create
+			float: left
+			cursor: pointer
+			width: 45%
+			z-index: 101
+			margin-left: 4%
+			button
+				width: 100%
+				height: 40px
+			&.scroll
+				position: fixed !important
+				width: 250px !important
+				bottom: 15px !important
+				height: 40% !important
+				top: auto !important
+				right: 15px
+				button
+					position: absolute
+					bottom: 0
+					width: 250px
+			&.active
+				position: fixed
+				right: 15px
+				top: 15px
+				width: 250px
+				height: 100%
+				button
+					width: 250px
+					letter-spacing: 10px
+					border-color: #FFA500
+		.search
+			width: 51%
+			float: left
+			height: 40px
+			cursor: pointer
+			&.scroll
+				position: fixed
+				left: 15px
+				top: 105px
+				height: 50%
+				width: 250px
+				input
+					height: 40px
+					width: 250px
+					padding: 3px 10px
+					font-size: 110%
+				.icon-search
+					margin-left: 0
+					margin-top: 3px
+				&:hover .icon-search
+					-webkit-transform: translateY(5px)
+			&:hover .icon-search
+				-webkit-transform: translateX(5px)
+			input
+				float: left
+				height: 40px
+				width: 88%
+				padding: 3px 10px
+				font-size: 110%
+		.checkin
+			button
+				width: 100%
+				height: 50px
+				font-size: 200%
+				margin-top: 16px
+			&.scroll
+				cursor: pointer
+				position: fixed
+				bottom: 15px
+				height: 35%
+				width: 250px
+				left: 15px
+				button
+					height: 40px
+					position: absolute
+					bottom: 0
+					width: 250px
+					font-size: 160%
+		.profile-button
+			position: absolute
+			bottom: 0
+			width: 100%
+			button
+				width: 100%
+				height: 40px
+				font-size: 180%
+				margin-top: 10px
+			&.scroll
+				cursor: pointer
+				position: fixed
+				top: 65px
+				height: 40%
+				width: 250px
+				right: 15px
+				button
+					height: 40px
+					width: 250px
+					font-size: 160%
+	section
+		margin-top: 16px
+	footer
+		margin-top: 16px
+
+.settings-panel
+	height: 32px
+	position: absolute
+	&.scroll
+		position: fixed
+		left: 15px
+		top: 15px
+
+.show-profile
+	width: 32px
+	height: 32px
+	cursor: pointer
+	position: absolute
+	left: 80px
+	background-image: url(icon/profile-icon-passive.png)
+	&.active
+		background-image: url(icon/profile-icon-active.png)
+		&:hover
+			background-image: url(icon/profile-icon-active-hover.png)
+
+.register
+	width: 32px
+	height: 32px
+	cursor: pointer
+	position: absolute
+	left: 80px
+	background-image: url(icon/register-user-passive.png)
+	&:hover
+		background-image: url(icon/register-user-active.png)
+
+label
+	@include box
+
+input, button
+	@include radius(1px)
+	@include box
+	outline: 0
+	border: 0
+	background: #ffffff
+	margin: 0
+	padding: 0
+	&:disabled
+		color: lightgray
+
+input
+	color: rgb(113, 113, 113)
+	font-weight: bold
+	&:focus
+		@include shadow(0 0 1px 1px lightblue)
+		// -webkit-animation: input 1s infinite
+		&.ng-invalid
+			@include shadow(0 0 1px 1px rgba(255, 0, 0, 0.1))
+	&::-webkit-input-placeholder
+		color: lightgray
+		text-transform: lowercase
+	&:-moz-placeholder
+		color: lightgray
+		text-transform: lowercase
+	&::-moz-placeholder
+		color: lightgray
+		text-transform: lowercase
+	&:-ms-input-placeholder
+		color: lightgray
+		text-transform: lowercase
+
+.qrcode-img
+	position: absolute
+	right: 10px
+	bottom: 10px
+
+// @-webkit-keyframes input
+// 	0%
+// 		@include shadow(0 0 1px 1px rgba(255, 165, 0, 0.3))
+// 	50%
+// 		@include shadow(0 0 3px 1px rgba(255, 165, 0, 0.3))
+// 	100%
+// 		@include shadow(0 0 1px 1px rgba(255, 165, 0, 0.3))
+
+button
+	@include radius(1px)
+	@include box
+	text-transform: uppercase
+	cursor: pointer
+	border: 1px solid rgba(211, 211, 211, 0.6)
+	color: #FFA500
+	font-size: 160%
+	font-weight: bold
+	letter-spacing: 10px
+	-webkit-transition: letter-spacing 0.1s linear, border-color 0.1s linear, color 0.1s linear
+	&.active
+		letter-spacing: 10px
+		border-color: #FFA500
+	&:hover
+		letter-spacing: 6px
+		border-color: #FFA500
+	&:disabled
+		color: lightgray
+	&:disabled:hover
+		letter-spacing: 10px
+		border-color: rgba(211, 211, 211, 0.6)
+
+.icon-search
+	-webkit-transition: all 0.1s linear
+	background: url(icon/search-9-m.png) no-repeat center center
+	width: 40px
+	height: 40px
+	margin-left: 5px
+	float: left
+
+.participient
+	@include radius(1px)
+	width: 100%
+	background-color: rgb(224, 224, 224)
+	border-spacing: 10px 6px
+	thead
+	tbody
+		tr
+			cursor: pointer
+			-webkit-transition: all 0.1s linear
+			&.active
+				td
+					background-color: lightblue !important
+			&.checkedin
+				td
+					background-color: lightgray
+			td
+				@include radius(1px)
+				background-color: rgb(196, 196, 196)
+				padding: 3px 6px
+			td:nth-child(1)
+				width: 15%
+			td:nth-child(2)
+				width: 15%
+			td:nth-child(3)
+				width: 30%
+			td:nth-child(4)
+				width: 20%
+			td:nth-child(5)
+				width: 20%
+
+			&.ng-enter
+				opacity: 0
+			&.ng-enter-active
+				opacity: 1
+
+			&.ng-leave
+				opacity: 1
+			&.ng-leave-active
+				opacity: 0
+
+.reg-form
+	width: 100%
+	height: 100%
+	position: fixed
+	top: 0
+	z-index: 100
+	left: 0
+	.reg-wrap
+		margin: 0 280px
+		height: 100%
+		position: relative
+		background-color: #fff
+		iframe
+			width: 100%
+			height: 100%
+			display: block
+			border: none
+	.close
+		width: 48px
+		height: 48px
+		position: absolute
+		left: -65px
+		top: 10px	
+		cursor: pointer
+		background-image: url(icon/close-window-big-passive_1.png)
+		&:hover
+			background-image: url(icon/close-window-big-active.png)
+
+.window
+	position: fixed
+	left: 0
+	top: 0
+	width: 100%
+	height: 100%
+	// background-color: rgba(0, 0, 0, 0.6)
+	display: table
+	.content
+		@include radius(2px)
+		@include box
+		position: relative
+		max-width: 600px
+		margin-left: auto
+		margin-right: auto
+		padding: 10px 30px 30px
+		background-color: rgb(238, 238, 238)
+// 		-webkit-animation: content 6s infinite
+
+// @-webkit-keyframes content
+// 	0%
+// 		@include shadow(0 0 3px 1px #FFA500)
+// 	50%
+// 		@include shadow(0 0 16px 1px #FFA500)
+// 	100%
+// 		@include shadow(0 0 3px 1px #FFA500)
+
+// .bounceOut
+// 	-webkit-animation-name: bounceOut
+// 	animation-name: bounceOut
+// 	-webkit-animation-duration: 0.75s
+// 	animation-duration: 0.75s
+
+// @keyframes bounceOut
+// 	20%
+// 		-webkit-transform: scale3d(0.9, 0.9, 0.9)
+// 		-ms-transform: scale3d(0.9, 0.9, 0.9)
+// 		transform: scale3d(0.9, 0.9, 0.9)
+// 	}
+
+// 	50%, 55%
+// 		opacity: 1
+// 		-webkit-transform: scale3d(1.1, 1.1, 1.1)
+// 		-ms-transform: scale3d(1.1, 1.1, 1.1)
+// 		transform: scale3d(1.1, 1.1, 1.1)
+// 	}
+
+// 	100%
+// 		opacity: 0
+// 		-webkit-transform: scale3d(0.3, 0.3, 0.3)
+// 		-ms-transform: scale3d(0.3, 0.3, 0.3)
+// 		transform: scale3d(0.3, 0.3, 0.3)
+// 	}
+// }
+
+.login
+	.version
+		position: absolute
+		top: 21px
+	header
+		text-align: center
+	aside
+		label
+			width: 48%
+			float: left
+			input
+				width: 100%
+				height: 40px
+				padding: 6px 10px
+				font-size: 110%
+			&:nth-child(2)
+				float: right
+	footer
+		margin-top: 15px
+		button
+			width: 100%
+			height: 50px
+			font-size: 190%
+
+.print-setting
+	width: 32px
+	height: 32px
+	position: absolute
+	cursor: pointer
+	left: 45px
+	background-image: url(icon/print-settings-passive.png)
+	&.setting-allow
+		background-image: url(icon/print-settings-neutral.png)
+		&:hover
+			background-image: url(icon/print-settings-active.png)
+	&.active
+		background-image: url(icon/print-settings-active.png)
+		&:hover
+			background-image: url(icon/print-settings-neutral.png)
+
+// .print-container
+// 	height: 100%
+// 	width: 100%
+// 	top: 0
+
+.print
+	header
+		text-align: center
+	section
+		.type
+			@include radius(16px)
+			@include box
+			height: 280px
+			background-color: rgb(255, 255, 255)
+			padding: 20px 20px
+			border: 1px solid transparent
+			margin-top: 20px
+			font-family: Arial
+			color: black
+			position: relative
+			box-shadow: 0 0 1px 1px
+			margin: 20px 0px 10px 40px
+			.field-to-active
+				clear: both
+				margin: 5px 0 5px -86px
+				position: relative
+				z-index: 1
+				h1
+					margin: 0 0 0 5px
+					font-size: 22pt
+					float: left
+					cursor: pointer
+					background-color: rgba(255, 255, 255, 0.3)
+					width: 480px
+					overflow: hidden
+					height: 35px
+					&.normal
+						font-weight: normal
+					&.label
+						font-style: italic
+						color: lightgray
+			.field-to-passive
+				cursor: pointer
+				color: #eeeeee
+				background-color: white
+				@include radius(1px)
+				h1
+					margin: 0
+					font-size: 20pt
+					&:hover
+						color: #000
+
+.profile
+	min-height: 300px
+	section
+		.main-field
+			margin-top: 16px
+			h1
+				margin: 0
+				font-size: 160%
+			h2
+				margin: 0
+				font-size: 130%
+
+.alert
+	@include radius(16px)
+	@include box
+	width: 640px
+	background-color: #ffffff
+	padding: 30px
+	position: absolute
+	left: 50%
+	top: 0
+	-webkit-transform: translateX(-50%)
+	header
+		text-align: center
+		cursor: pointer
+		background-image: url(icon/close-window-m-passive2.png)
+		background-repeat: no-repeat
+		&:hover
+			background-image: url(icon/close-window-m-active_old2.png)
+		h1
+			margin: 0
+
+.execution-button
+	width: 32px
+	height: 32px
+	position: absolute
+	left: 0
+	top: 25px
+	cursor: pointer
+	&.close
+		background-image: url(icon/close-window-m-passive.png)
+	&.close:hover
+		background-image: url(icon/close-window-m-active.png)
+
+.make-remove
+	width: 32px
+	height: 32px
+	background-image: url(icon/close-field-passive.png)
+	cursor: pointer
+	float: left
+	&:hover
+		background-image: url(icon/close-field-active.png)
+
+.refresh-list
+	width: 32px
+	height: 32px
+	position: absolute
+	left: 90px
+	background-image: url(icon/refresh-buttom-active.png)
+	cursor: pointer
+	&:hover
+		background-image: url(icon/refresh-buttom-hover.png)
+	&.passive
+		background-image: url(icon/refresh-buttom-hover.png)
+
+.add-field
+	height: 32px
+	cursor: pointer
+	&:hover
+		h1
+			color: black
+	&.close
+		h1
+			color: #FFA500
+	h1
+		margin: 0
+		color: #eeeeee
+		margin-right: 40px
+		font-size: 21pt
+
+.make-down
+	width: 32px
+	height: 32px
+	background-image: url(icon/field-to-down-passive.png)
+	cursor: pointer
+	float: left
+	&:hover
+		background-image: url(icon/field-to-down-active.png)
+
+.make-up
+	width: 32px
+	height: 32px
+	background-image: url(icon/field-to-up-passive.png)
+	cursor: pointer
+	float: left
+	&:hover
+		background-image: url(icon/field-to-up-active.png)
+
+.loader-box
+	position: absolute
+	right: 0
+	min-width: 40px
+	&.scroll
+		width: 250px
+		right: 15px
+		position: fixed
+		margin-left: 916px
+		top: 10px
+		.ajax-status
+			div
+				text-align: left
+		.loader
+			float: left
+	.loader
+		height: 30px
+		list-style: none
+		float: right
+		-webkit-transition: all 0.3s ease-in-out
+		&.ng-hide
+			display: block !important
+			opacity: 0
+		&.ng-hide-add
+			opacity: 1
+		&.ng-hide-add-active
+			opacity: 0
+			& li:nth-child(1)
+				margin-left: 0px
+			& li:nth-child(2)
+				margin-left: 45px
+			& li:nth-child(3)
+				margin-left: 90px
+		& li
+			background-color: #ffffff
+			width: 10px
+			height: 10px
+			float: left
+			margin-right: 5px
+			margin-left: 0
+			-webkit-transition: all 0.3s ease-in-out
+		& li:nth-child(1)
+			-webkit-animation: laadbalk 0.6s ease-in-out infinite 0
+		& li:nth-child(2)
+			-webkit-animation: laadbalk 0.6s ease-in-out infinite -0.2s
+		& li:nth-child(3)
+			margin-right: 0
+			-webkit-animation: laadbalk 0.6s ease-in-out infinite -0.4s
+
+.ajax-status
+	padding-top: 6px
+	min-height: 30px
+	clear: both
+	div
+		height: 23px
+		overflow: hidden
+		text-align: right
+		width: 250px
+		text-overflow: ellipsis
+		white-space: nowrap
+		&.neutral
+			color: #717171
+		&.success
+			color: #5cb85c
+		&.error
+			color: #d9534f
+			
+
+@-webkit-keyframes 'laadbalk' 
+	0%
+		height: 10px
+		margin-top: 10px
+	50%
+		height: 30px
+		margin-top: 0px
+	100%
+		height: 10px
+		margin-top: 10px

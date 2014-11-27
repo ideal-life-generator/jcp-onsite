@@ -1,0 +1,13 @@
+{
+	"name": "congresso-scan",
+	"main": "index.html",
+	"webkit": {
+		"plugin": true
+	},
+	"window": {
+		"title": "congresso-scan",
+		"toolbar": false,
+		"width": 1378,
+		"height": 786
+	}
+}

@@ -1,0 +1,246 @@
+<!doctype html>
+<html ng-app="scanApplication">
+<head>
+	<title>Congresso scan application</title>
+	<script type="text/javascript" src="lib/dymo.min.js"></script>
+	<script type="text/javascript" src="lib/polyglot.js"></script>
+	<script type="text/javascript" src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular-animate.min.js"></script>
+	<script type="text/javascript" src="lib/angular-resource.min.js"></script>
+	<script type="text/javascript" src="lib/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="client/config.js"></script>
+	<script type="text/javascript" src="client/services.js"></script>
+	<script type="text/javascript" src="client/directives.js"></script>
+	<script type="text/javascript" src="client/controller.js"></script>
+	<script type="text/javascript" src="lib/angular-auth.js"></script>
+	<script type="text/javascript" src="translate/lyric_us.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="style/stylesheet.css">
+	<meta name="viewport" content="maximum-scale=1.0, user-scalable=0" />
+	<meta charset="UTF-8">
+</head>
+<body ng-controller="ScanController"
+			class="tc">
+
+	<div class="container">
+
+		<!-- Loader panel start -->
+		<div class="loader-box"
+				 scroll>
+			<ul class="loader"
+					ng-show="loader.loading"><li></li><li></li><li></li></ul>
+			<div class="ajax-status">
+				<div class="neutral"
+						 ng-show="message.neutral">
+					~message.neutral~
+				</div>
+				<div class="success"
+						 ng-show="message.success">
+					~message.success~
+				</div>
+				<div class="error"
+						 ng-show="message.error">
+					~message.error~
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!-- Loader panel end -->
+
+		<!-- Login panel start -->
+		<form class="login"
+					ng-hide="participants.participantsList"
+					name="login"
+					ng-submit="freelancer.loginer()">
+			<p class="version">v 1.4.5</p>
+			<header>
+				<h1>~lyric.constant.header_login~</h1>
+			</header>
+<!-- 			<aside ng-init="freelancer.username = 'atea1'; freelancer.password = '123456'"> -->
+			<aside>
+				<label class="username">
+					<input type="text"
+								 ng-model="freelancer.username"
+								 placeholder="~lyric.constant.placeholder_username~"
+								 ng-disabled="freelancer.profile"
+								 tabindex="1"
+								 required>
+				</label>
+				<label class="password">
+					<input type="password"
+								 ng-model="freelancer.password"
+								 placeholder="~lyric.constant.placeholder_password~"
+								 ng-disabled="freelancer.profile"
+								 tabindex="2"
+								 required>
+				</label>
+				<div class="clear"></div>
+			</aside>
+			<footer>
+				<button tabindex="3"
+								ng-disabled="login.$invalid">~lyric.constant.button_login~</button>
+			</footer>
+		</form><!-- Login panel end -->
+
+		<div class="reg-form"
+				 ng-show="alert.active === 'registration'">
+			<div class="reg-wrap">
+				<iframe></iframe>
+			</div>
+		</div>
+
+		<div class="main"
+				 ng-show="participants.participantsList">
+			<div class="settings-panel"
+					 scroll>
+				<div class="log-out"
+						 ng-show="freelancer.profile"
+						 ng-click="freelancer.logout()"></div>
+				<div class="print-setting"
+						 ng-class="{ 'setting-allow': participants.activeParticipant,
+						 						 'active': alert.active === 'print' && participants.activeParticipant }"
+						 ng-click="alert.wrapToggle('print')"></div>
+				<div class="refresh-list"
+						 ng-click="participants.refreshParticipantsList()"
+						 ng-class="{ 'passive': participants.refresh }"></div>
+			</div>
+	
+			<header>
+				<h1 class="event-name"
+						scroll>~events.activeEvent.event_name~</h1>
+				<h4 class="checkedin-value"
+						scroll><span class="lightblue">~participants.participantsList.checkidins~</span> <span class="lightgray">/ ~participants.participantsList.length~</span></h4>
+<!-- 				<div class="select event-name"
+						 ng-if="events.length > 1"
+						 ng-click="openSelect()"
+						 scroll>
+					<p>~activeEvent.event_name~</p>
+					<ul ng-show="showSelect">
+						<li ng-repeat="event in events | filter:eventFilter"
+								ng-click="selectOption(event)">
+							~event.event_name~
+						</li>
+					</ul>
+				</div> -->
+			</header>
+			<aside>
+				<div class="panel-wrap">
+					<label class="search"
+								 ng-click="close()"
+								 scroll>
+						<input type="text"
+									 ng-model="participants.searchString"
+									 placeholder="~lyric.constant.placeholder_search~"
+									 search>
+						<span class="icon-search"></span>
+					</label>
+					<label class="create"
+								 ng-class="{ 'active': alert.active === 'registration' }"
+								 scroll>
+						<button ng-click="alert.wrapToggle('registration')">~button.createButton~</button>
+					</label>
+				</div>
+				<div class="clear"></div>
+					<label class="checkin"
+								 scroll>
+						<button ng-disabled="!participants.activeParticipant || participants.checkins"
+								 		ng-click="participants.checkedinOrPrint(participants.activeParticipant)">~button.cheskedinButtonTag~</button>
+					</label>
+					<label class="profile-button"
+								 scroll>
+						<button ng-click="alert.wrapToggle('profile')"
+								 		ng-class="{ 'active': alert.active === 'profile' }"
+										ng-disabled="!participants.activeParticipant">~lyric.constant.header_profile~</button>
+					</label>
+			</aside>
+			<section>
+				<table class="participient">
+					<thead>
+						<tr>
+							<th>~lyric.constant.field_firstname~</th>
+							<th>~lyric.constant.field_lastname~</th>
+							<th>~lyric.constant.field_companyname~</th>
+							<th>~lyric.constant.field_registered~</th>
+							<th>~lyric.constant.field_checkedin~</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="participiant in participants.filteredList"
+								ng-click="participants.selectParticipant(participiant)"
+								ng-class="{ 'checkedin': participiant.status === 'checkedin', 'active': participiant.active }">
+							<td>~participiant.first_name~</td>
+							<td>~participiant.last_name~</td>
+							<td>~participiant.company_name~</td>
+							<td>~participiant.create_time~</td>
+							<td>~participiant.status === "checkedin" ? participiant.checkedin_time : ""~</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+
+	<div class="alert"
+			 ng-show="alert.active"
+			 ng-style="alert.scroll">
+		<div class="print"
+				 ng-show="alert.active === 'print'">
+			<header ng-click="alert.wrapToggle('print')">
+				<h1>~lyric.constant.header_print~</h1>
+			</header>
+			<section class="layout">
+				<div class="type">
+					<div class="field-to-active"
+							 ng-repeat="field in print.printSettings[participants.activeParticipant.form_id].activeField">
+						<div class="make-remove"
+								 ng-show="field.makeRemove"
+								 ng-click="print.toPassiveSettings($index, field, participants.activeParticipant.form_id)"></div>
+						<div class="make-down"
+								 ng-click="print.priorityDown($index, participants.activeParticipant.form_id)"
+								 ng-hide="$last"></div>
+						<div class="make-up"
+								 ng-click="print.priorityUp($index, participants.activeParticipant.form_id)"
+								 ng-hide="$first"></div>
+						<h1 ng-click="print.makeBold(field)"
+								ng-class="{ 'normal': field.bold === 'False', 'label': field.isLabel }"
+								ng-bind-html="print.getField(field, participants.activeParticipant)"></h1>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+					<div class="add-field"
+							 ng-click="print.passiveVisible()"
+							 ng-class="{ 'close': participantToPrint.isVisible }"
+							 ng-show="print.printSettings[participants.activeParticipant.form_id].passiveField.length && print.printSettings[participants.activeParticipant.form_id].activeField.length < 6">
+						<h1>~print.passiveList ? lyric.constant.button_close_list : lyric.constant.button_add_field~</h1>
+					</div>
+					<div class="field-to-passive"
+							 ng-repeat="field in print.printSettings[participants.activeParticipant.form_id].passiveField"
+							 ng-show="print.passiveList && print.printSettings[participants.activeParticipant.form_id].activeField.length < 6"
+							 ng-click="print.toActiveSettings($index, field, participants.activeParticipant.form_id)">
+						<h1>~field.label~</h1>
+					</div>
+					<img class="qrcode-img"
+							 ng-show="participants.activeParticipant"
+							 ng-src="~participants.activeParticipant.barcode ? 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=' +  participants.activeParticipant.barcode + '&choe=UTF-8' : ''~">
+				</div>
+			</section>
+		</div>
+		<div class="profile"
+				 ng-show="alert.active === 'profile'">
+			<header ng-click="alert.wrapToggle('profile')">
+				<h1>~lyric.constant.header_profile~</h1>
+			</header>
+			<section>
+				<div class="main-field">
+					<h1 ng-repeat="field in print.complateProfile | orderBy:'-priority':true"
+							ng-init="value = print.getField(field, participants.activeParticipant)"
+							ng-show="field.label != value">
+						~field.label + ": " + value~
+					</h1>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</body>
+</html>
